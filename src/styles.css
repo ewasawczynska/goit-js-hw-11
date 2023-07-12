@@ -1,0 +1,10 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  margin: 0px;
+}
+
+form {
+  background-color: lightcoral;
+  padding: 15px;
+}

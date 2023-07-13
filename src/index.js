@@ -1,5 +1,6 @@
 import * as pixabay from './pixabay';
 import Notiflix from 'notiflix';
+import _ from 'lodash';
 
 const gallery = document.querySelector('.gallery');
 const searchQuery = document.querySelector('input');
@@ -13,13 +14,14 @@ let pageQuery = null;
 let isLoading = false;
 let imagesCounter = null;
 
-const totalPages = 100 / limit;
+const totalPages = 10000 / limit;
 
 pixabay.init();
 
 function searchImages(event) {
   event.preventDefault();
-  pageImage;
+  pageImage = 1;
+  per_page = 40;
   gallery.innerHTML = '';
   pageQuery = searchQuery.value;
   getImages(pageQuery, pageImage, displayImages);
@@ -29,7 +31,15 @@ async function getImages(query, page, callback) {
   try {
     const result = await pixabay.searchImage(query, page);
     callback(result);
-    isLoading;
+    const { height: cardHeight } = document
+      .querySelector('.gallery')
+      .firstElementChild.getBoundingClientRect();
+
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    });
+    isLoading = false;
   } catch (error) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
@@ -39,7 +49,14 @@ async function getImages(query, page, callback) {
 }
 
 function displayImages(data) {
+  imagesCounter = data.totalHits;
+  Notiflix.Notify.success(`Hooray! We found ${imagesCounter} images.`);
   pushGallery(data.hits);
+  moreButton.classList.remove('load-more');
+  moreButton.classList.add('lmstyle');
+  if (pageImage > 1) {
+    moreButton.addEventListener('click', searchImages);
+  }
 }
 
 function pushGallery(items) {
@@ -66,9 +83,6 @@ function pushGallery(items) {
     )
     .join(' ');
   gallery.innerHTML += markup;
-  if (pageImage > 1) {
-    moreButton.classList.remove('load-more');
-  }
 }
 
 function addGallery(data) {
@@ -76,7 +90,14 @@ function addGallery(data) {
 }
 
 searchForm.addEventListener('submit', searchImages);
-button.addEventListener('click', () => {
+
+// gallery.onscroll = function () {
+//   if (window.scrollY > document.body.offsetHeight - window.outerHeight) {
+//     body.style.height = document.body.offsetHeight + 200 + 'px';
+//   }
+// };
+
+moreButton.addEventListener('click', () => {
   if (pageImage > totalPages) {
     Notiflix.Notify.info(
       "We're sorry, but you've reached the end of search results."

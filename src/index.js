@@ -20,8 +20,7 @@ pixabay.init();
 
 function searchImages(event) {
   event.preventDefault();
-  pageImage = 1;
-  per_page = 40;
+  let pageImage = 1;
   gallery.innerHTML = '';
   pageQuery = searchQuery.value;
   getImages(pageQuery, pageImage, displayImages);

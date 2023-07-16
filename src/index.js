@@ -21,7 +21,7 @@ pixabay.init();
 
 function searchImages(event) {
   event.preventDefault();
-  pageImage = 1;
+  let pageImage = 1;
   gallery.innerHTML = '';
   pageQuery = searchQuery.value;
   getImages(pageQuery, pageImage, displayImages);

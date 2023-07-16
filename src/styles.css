@@ -32,9 +32,15 @@ button {
   cursor: pointer;
 }
 
-.load-more {
-  display: none;
+button:focus,
+button:active,
+button:hover {
+  background-color: lightyellow;
 }
+
+/* .load-more {
+  display: none;
+} */
 
 .gallery {
   display: flex;
@@ -47,6 +53,7 @@ button {
   flex-basis: calc((100% - 45px) / 4);
   width: 300px;
   height: 250px;
+  border: 3px lightcoral;
 }
 
 img {
@@ -58,7 +65,7 @@ img {
   display: flex;
 }
 
-.lmstyle {
+/* .lmstyle {
   display: flex;
   justify-content: center;
   margin-top: 30px;
@@ -78,4 +85,5 @@ img {
 .lmstyle:hover {
   background-color: white;
   color: lightcoral;
-}
+  border: dotted lightcoral;
+} */

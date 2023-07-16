@@ -9,7 +9,7 @@ export function init(api_key) {
 export async function searchImage(query, page) {
   const url = `${urlPixabay}?key=${api_key}&q=${encodeURIComponent(
     query
-  )}&page=${page}&per_page=40&image_type=photo&orientation=horizontal&safesearch=true`;
+  )}&page=${page}&per_page=20&image_type=photo&orientation=horizontal&safesearch=true`;
   const response = await axios.get(url);
   return response.data;
 }

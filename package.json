@@ -22,7 +22,8 @@
     "infinite-scroll": "^4.0.1",
     "lodash": "^4.17.21",
     "modern-normalize": "^1.1.0",
-    "notiflix": "^3.2.6"
+    "notiflix": "^3.2.6",
+    "waypoints": "^4.0.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",

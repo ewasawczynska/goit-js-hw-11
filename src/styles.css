@@ -53,7 +53,6 @@ button:hover {
   flex-basis: calc((100% - 45px) / 4);
   width: 300px;
   height: 250px;
-  border: 3px lightcoral;
 }
 
 img {

@@ -52,7 +52,7 @@ button:hover {
 .photo-card {
   flex-basis: calc((100% - 45px) / 4);
   width: 300px;
-  height: 250px;
+  height: 280px;
 }
 
 img {

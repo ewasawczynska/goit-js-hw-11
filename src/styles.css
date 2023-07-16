@@ -72,3 +72,10 @@ img {
   font-size: 15px;
   border: dotted white;
 }
+
+.lmstyle:focus,
+.lmstyle:active,
+.lmstyle:hover {
+  background-color: white;
+  color: lightcoral;
+}

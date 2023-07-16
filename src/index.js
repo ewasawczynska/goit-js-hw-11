@@ -1,6 +1,6 @@
 import * as pixabay from './pixabay';
 import Notiflix from 'notiflix';
-import _ from 'lodash';
+import _, { remove } from 'lodash';
 
 const gallery = document.querySelector('.gallery');
 const searchQuery = document.querySelector('input');
@@ -14,16 +14,19 @@ let pageQuery = null;
 let isLoading = false;
 let imagesCounter = null;
 
-const totalPages = 10000 / limit;
+const totalPages = 500 / limit;
 
 pixabay.init();
 
 function searchImages(event) {
   event.preventDefault();
-  let pageImage = 1;
+  pageImage += 1;
   gallery.innerHTML = '';
   pageQuery = searchQuery.value;
   getImages(pageQuery, pageImage, displayImages);
+  if (pageImage > 1) {
+    moreButton.addEventListener('submit', searchImages);
+  }
 }
 
 async function getImages(query, page, callback) {
@@ -48,8 +51,8 @@ async function getImages(query, page, callback) {
 }
 
 function displayImages(data) {
-  imagesCounter = data.totalHits;
-  Notiflix.Notify.success(`Hooray! We found ${imagesCounter} images.`);
+  // imagesCounter = data.totalHits;
+  // Notiflix.Notify.success(`Hooray! We found ${imagesCounter} images.`);
   pushGallery(data.hits);
   moreButton.classList.remove('load-more');
   moreButton.classList.add('lmstyle');
@@ -96,7 +99,7 @@ searchForm.addEventListener('submit', searchImages);
 //   }
 // };
 
-moreButton.addEventListener('click', () => {
+moreButton.addEventListener('submit', () => {
   if (pageImage > totalPages) {
     Notiflix.Notify.info(
       "We're sorry, but you've reached the end of search results."

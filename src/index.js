@@ -42,6 +42,8 @@ async function getImages(query, page, callback) {
       behavior: 'smooth',
     });
     isLoading = false;
+    moreButton.classList.remove('load-more');
+    moreButton.classList.add('lmstyle');
   } catch (error) {
     Notiflix.Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
@@ -54,8 +56,6 @@ function displayImages(data) {
   // imagesCounter = data.totalHits;
   // Notiflix.Notify.success(`Hooray! We found ${imagesCounter} images.`);
   pushGallery(data.hits);
-  moreButton.classList.remove('load-more');
-  moreButton.classList.add('lmstyle');
   if (pageImage > 1) {
     moreButton.addEventListener('click', searchImages);
   }

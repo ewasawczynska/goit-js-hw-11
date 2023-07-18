@@ -2,12 +2,18 @@ import * as pixabay from './pixabay';
 import Notiflix from 'notiflix';
 import _ from 'lodash';
 import Waypoint from 'waypoints/lib/noframework.waypoints.min.js';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const gallery = document.querySelector('.gallery');
 const searchQuery = document.querySelector('input');
 const searchForm = document.querySelector('form');
 const button = document.querySelector('button');
 const moreButton = document.querySelector('.load-more');
+const simplelightbox = new SimpleLightbox('.photo-card a', {
+  captionsData: '',
+  captionPosition: 'bottom',
+});
 
 let pageImage = 1;
 // let limit = 40;
@@ -89,6 +95,7 @@ function pushGallery(items) {
     )
     .join(' ');
   gallery.innerHTML += markup;
+  simplelightbox.refresh();
 }
 
 function addGallery(data) {
